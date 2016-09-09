@@ -16,6 +16,7 @@
 		A85B6CEA1D7E6D2A00E43F59 /* CarListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85B6CE91D7E6D2900E43F59 /* CarListVC.swift */; };
 		A85B6CEC1D7E71E900E43F59 /* CarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85B6CEB1D7E71E900E43F59 /* CarModel.swift */; };
 		A85B6CEE1D7E727400E43F59 /* CarListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85B6CED1D7E727400E43F59 /* CarListCell.swift */; };
+		A8A2406C1D8284CA00964F74 /* CarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A2406B1D8284CA00964F74 /* CarDetailVC.swift */; };
 		E6C6D53C4FE73D796292600A /* Pods_PremiumCar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E8A6288D2F82C45F2CFABD /* Pods_PremiumCar.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		A85B6CE91D7E6D2900E43F59 /* CarListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarListVC.swift; sourceTree = "<group>"; };
 		A85B6CEB1D7E71E900E43F59 /* CarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarModel.swift; sourceTree = "<group>"; };
 		A85B6CED1D7E727400E43F59 /* CarListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarListCell.swift; sourceTree = "<group>"; };
+		A8A2406B1D8284CA00964F74 /* CarDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarDetailVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				A85B6CEB1D7E71E900E43F59 /* CarModel.swift */,
 				A85B6CE91D7E6D2900E43F59 /* CarListVC.swift */,
 				A85B6CED1D7E727400E43F59 /* CarListCell.swift */,
+				A8A2406B1D8284CA00964F74 /* CarDetailVC.swift */,
 				A85B6CDE1D7D875D00E43F59 /* ColorLET.swift */,
 				A85B6CDF1D7D875D00E43F59 /* ToolLet.swift */,
 				A85B6CE71D7E604B00E43F59 /* SetupViewLET.swift */,
@@ -222,6 +225,7 @@
 			files = (
 				A85B6CCF1D7D7DB100E43F59 /* ViewController.swift in Sources */,
 				A85B6CEC1D7E71E900E43F59 /* CarModel.swift in Sources */,
+				A8A2406C1D8284CA00964F74 /* CarDetailVC.swift in Sources */,
 				A85B6CE01D7D875D00E43F59 /* ColorLET.swift in Sources */,
 				A85B6CE81D7E604B00E43F59 /* SetupViewLET.swift in Sources */,
 				A85B6CEA1D7E6D2A00E43F59 /* CarListVC.swift in Sources */,
