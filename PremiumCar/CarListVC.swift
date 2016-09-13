@@ -23,13 +23,21 @@ class CarListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dic = ["name" : "宝马X6", "url" : "BaoMa", "numbel" : "京A 88888"]
-        let model = CarModel(dic: dic)
-        let dic2 = ["name" : "奔驰", "url" : "BenChi", "numbel" : "京A 66688"]
+        let dic0 = ["name" : "保时捷 911", "url" : "Porsche-911", "numbel" : "京A 32N28"]
+        let model0 = CarModel(dic: dic0)
+        let dic1 = ["name" : "宾利 添越", "url" : "Bingley-bentayga", "numbel" : "京N 2O4P2"]
+        let model1 = CarModel(dic: dic1)
+        let dic2 = ["name" : "捷豹 F-Pace", "url" : "Jaguar-fPace", "numbel" : "京Q 12JL1"]
         let model2 = CarModel(dic: dic2)
-        let dic3 = ["name" : "保时捷", "url" : "BaoShiJie", "numbel" : "京A 00011"]
+        let dic3 = ["name" : "奔驰 SL", "url" : "Benz-SL", "numbel" : "京A 93DL8"]
         let model3 = CarModel(dic: dic3)
-        dataSource = [model, model2, model3]
+        let dic4 = ["name" : "劳斯莱斯 魅影", "url" : "RollsRoyce-wraith", "numbel" : "京Q J4Y89"]
+        let model4 = CarModel(dic: dic4)
+        let dic5 = ["name" : "特斯拉 ModelS", "url" : "Tesla-modelS", "numbel" : "京N 6NN18"]
+        let model5 = CarModel(dic: dic5)
+
+        
+        dataSource = [model0, model1, model2, model3, model4, model5]
         setupUI()
     }
     

@@ -27,9 +27,9 @@ class CarListCell: UITableViewCell {
         imgView?.contentMode = .ScaleAspectFill
         contentView.addSubview(imgView!)
         imgView?.snp_makeConstraints(closure: { (make) in
-            make.top.equalTo(0)
-            make.left.equalTo(0)
-            make.size.equalTo(CGSizeMake(140, 80))
+            make.top.equalTo(8)
+            make.left.equalTo(8)
+            make.size.equalTo(CGSizeMake(124, 64))
         })
         
         nameLabel = UILabel()

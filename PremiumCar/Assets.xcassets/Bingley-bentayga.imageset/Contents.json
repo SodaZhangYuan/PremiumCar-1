@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "Bingley-bentayga.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "BaoMa@2x.png",
       "scale" : "2x"
     },
     {

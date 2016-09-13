@@ -11,6 +11,7 @@ import UIKit
 class CarDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var carModel: CarModel!
+    var dataArray: [AnyObject]!
     private var tableView: UITableView!
     private var banner: UIImageView!
     
@@ -18,6 +19,7 @@ class CarDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dataArray = ["09月03日\t￥50 \n\n为爱车做了 车辆清洗", "08月21日\t￥50 \n\n为爱车做了 车辆清洗", "07月16日\t￥200 \n\n为爱车做了 车辆精洗", "07月08日\t￥12000 \n\n为爱车做了 2万公里保养", "06月02日\t￥50 \n\n为爱车做了 车辆清洗", "05月27日\t￥50 \n\n为爱车做了 车辆清洗"]
         setupUI()
     }
     
@@ -34,52 +36,84 @@ class CarDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         banner.snp_makeConstraints(closure: { (make) in
             make.top.equalTo(0)
             make.left.equalTo(0)
-            make.size.equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH * 9 / 16))
+            make.size.equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH))
         })
         banner.image = UIImage(named: carModel.url!)
         
-        self.tableView = UITableView(frame: self.view.bounds, style: .Plain)
+        self.tableView = UITableView(frame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 50 - 64), style: .Plain)
         self.tableView.backgroundColor = UIColor.clearColor()
-        self.tableView.separatorStyle = .None
+//        self.tableView.separatorStyle = .None
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "CellIdentifier")
         self.view.addSubview(self.tableView)
-        let header = UIView(frame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 9 / 16))
+        let header = UIView(frame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH))
         self.tableView.tableHeaderView = header
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         
-        let btn = UIButton(type: .Custom)
-        btn.backgroundColor = UIColor.blackColor()
-        btn.setTitle("预约取车", forState: .Normal)
-        btn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        btn.titleLabel?.font = UIFont.systemFontOfSize(20)
-        btn.addTarget(self, action: #selector(buttonClicked(_:)), forControlEvents: .TouchUpInside)
-        btn.alpha = 0.8
-        self.view.addSubview(btn)
-        btn.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 50))
+        let btn0 = UIButton(type: .Custom)
+        btn0.backgroundColor = COLOR_BLACK
+        btn0.setTitle("续保", forState: .Normal)
+        btn0.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        btn0.titleLabel?.font = UIFont.systemFontOfSize(20)
+        btn0.addTarget(self, action: #selector(buttonClicked(_:)), forControlEvents: .TouchUpInside)
+        self.view.addSubview(btn0)
+        btn0.snp_makeConstraints { (make) in
+            make.size.equalTo(CGSizeMake(SCREEN_WIDTH / 2, 50))
             make.bottom.equalTo(self.view.snp_bottom)
         }
+        
+        let btn1 = UIButton(type: .Custom)
+        btn1.backgroundColor = COLOR_BLACK
+        btn1.setTitle("保养", forState: .Normal)
+        btn1.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        btn1.titleLabel?.font = UIFont.systemFontOfSize(20)
+        btn1.addTarget(self, action: #selector(buttonClicked(_:)), forControlEvents: .TouchUpInside)
+        self.view.addSubview(btn1)
+        btn1.snp_makeConstraints { (make) in
+            make.size.equalTo(btn0)
+            make.left.equalTo(btn0.snp_right)
+            make.bottom.equalTo(self.view.snp_bottom)
+        }
+        
+        let line = UIView()
+        line.backgroundColor = UIColor.whiteColor()
+        self.view.addSubview(line)
+        line.snp_makeConstraints { (make) in
+            make.size.equalTo(CGSizeMake(0.5, 44))
+            make.top.equalTo(btn1).offset(3)
+            make.left.equalTo(btn1)
+        }
+        line.alpha = 0.4
     }
     
     //MARK: Handle
     func buttonClicked(sender: UIButton) {
+        
+        let submitVC = SubmitVC()
+        self.navigationController?.pushViewController(submitVC, animated: true)
     }
     
     //MARK: TableViewDelegate
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         return 2
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if section == 0 {
+            return 1
+        }
+        return dataArray.count
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        if indexPath.row == 0 {
-            return 30
-        }else {
-            return 1000
+        if indexPath.section == 0 {
+            return 100
         }
+        return 80
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -87,23 +121,11 @@ class CarDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCellWithIdentifier("CellIdentifier", forIndexPath: indexPath)
         cell.selectionStyle = .None
         
-        if indexPath.row == 0 {
-            cell.backgroundColor = UIColor.clearColor()
-            
-            let gradient = UIImageView(image: UIImage(named: "DetailGradient"))
-            gradient.clipsToBounds = true
-            gradient.contentMode = .ScaleAspectFit
-            cell.contentView.addSubview(gradient)
-            gradient.snp_makeConstraints(closure: { (make) in
-                make.top.equalTo(0)
-                make.left.equalTo(0)
-                make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 30))
-            })
-        }else {
+        if indexPath.section == 0 {
             cell.backgroundColor = UIColor.whiteColor()
             
             let numbelLabel = UILabel()
-            numbelLabel.backgroundColor = RGBA(3, g: 84, b: 253, a: 1)
+            numbelLabel.backgroundColor = COLOR_BLACK //RGBA(3, g: 84, b: 253, a: 1)
             numbelLabel.textColor = UIColor.whiteColor()
             numbelLabel.font = UIFont.boldSystemFontOfSize(38)
             numbelLabel.textAlignment = .Center
@@ -116,7 +138,15 @@ class CarDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 make.size.equalTo(CGSizeMake(200, 60))
             })
             numbelLabel.text = self.carModel.numbel
-            numbelLabel.alpha = 0.6
+            numbelLabel.alpha = 0.85
+        }else {
+            let text = dataArray[indexPath.row] as! String
+            let label = UILabel(frame: CGRectMake(18, 0, SCREEN_WIDTH - 26, 60))
+            label.textColor = RGBA(120, g: 120, b: 120, a: 1)
+            label.numberOfLines = 0
+            label.font = UIFont.systemFontOfSize(14)
+            cell.contentView.addSubview(label)
+            label.text = text
         }
         
         return cell
