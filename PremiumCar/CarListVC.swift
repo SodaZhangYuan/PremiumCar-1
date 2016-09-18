@@ -10,8 +10,8 @@ import UIKit
 
 class CarListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    private var tableView: UITableView!
-    private var dataSource: [CarModel] = []  {
+    fileprivate var tableView: UITableView!
+    fileprivate var dataSource: [CarModel] = []  {
         
         didSet {
             
@@ -24,17 +24,17 @@ class CarListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         
         let dic0 = ["name" : "保时捷 911", "url" : "Porsche-911", "numbel" : "京A 32N28"]
-        let model0 = CarModel(dic: dic0)
+        let model0 = CarModel(dic: dic0 as [String : AnyObject])
         let dic1 = ["name" : "宾利 添越", "url" : "Bingley-bentayga", "numbel" : "京N 2O4P2"]
-        let model1 = CarModel(dic: dic1)
+        let model1 = CarModel(dic: dic1 as [String : AnyObject])
         let dic2 = ["name" : "捷豹 F-Pace", "url" : "Jaguar-fPace", "numbel" : "京Q 12JL1"]
-        let model2 = CarModel(dic: dic2)
+        let model2 = CarModel(dic: dic2 as [String : AnyObject])
         let dic3 = ["name" : "奔驰 SL", "url" : "Benz-SL", "numbel" : "京A 93DL8"]
-        let model3 = CarModel(dic: dic3)
+        let model3 = CarModel(dic: dic3 as [String : AnyObject])
         let dic4 = ["name" : "劳斯莱斯 魅影", "url" : "RollsRoyce-wraith", "numbel" : "京Q J4Y89"]
-        let model4 = CarModel(dic: dic4)
+        let model4 = CarModel(dic: dic4 as [String : AnyObject])
         let dic5 = ["name" : "特斯拉 ModelS", "url" : "Tesla-modelS", "numbel" : "京N 6NN18"]
-        let model5 = CarModel(dic: dic5)
+        let model5 = CarModel(dic: dic5 as [String : AnyObject])
 
         
         dataSource = [model0, model1, model2, model3, model4, model5]
@@ -42,25 +42,25 @@ class CarListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     //MARK: UI
-    private func setupUI() {
+    fileprivate func setupUI() {
         
         self.view.backgroundColor = RGBA(0, g: 0, b: 0, a: 1)
         
-        self.tableView = UITableView(frame: self.view.bounds, style: .Plain)
-        self.tableView.backgroundColor = UIColor.whiteColor()
+        self.tableView = UITableView(frame: self.view.bounds, style: .plain)
+        self.tableView.backgroundColor = UIColor.white
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.registerClass(CarListCell.self, forCellReuseIdentifier: "CarListCellIdentifier")
+        self.tableView.register(CarListCell.self, forCellReuseIdentifier: "CarListCellIdentifier")
         self.view.addSubview(self.tableView)
-        self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
 
     //MARK: Handle
-    func buttonClicked(sender: UIButton) {
+    func buttonClicked(_ sender: UIButton) {
     }
     
     //MARK: TableViewDelegate
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if dataSource.count > 0 {
             return dataSource.count
@@ -69,27 +69,27 @@ class CarListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return CarListCell.height()
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("CarListCellIdentifier", forIndexPath: indexPath) as! CarListCell
-        cell.selectionStyle = .Gray
-        cell.accessoryType = .DisclosureIndicator
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CarListCellIdentifier", for: indexPath) as! CarListCell
+        cell.selectionStyle = .gray
+        cell.accessoryType = .disclosureIndicator
         
-        let model: CarModel = dataSource[indexPath.row]
+        let model: CarModel = dataSource[(indexPath as NSIndexPath).row]
         cell.update(model)
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        let model: CarModel = dataSource[indexPath.row]
+        let model: CarModel = dataSource[(indexPath as NSIndexPath).row]
         let detailVC = CarDetailVC()
         detailVC.carModel = model
         detailVC.title = model.name

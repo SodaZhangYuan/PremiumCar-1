@@ -8,42 +8,42 @@
 
 import UIKit
 
-let SCREEN_WIDTH    = UIScreen.mainScreen().bounds.width
-let SCREEN_HEIGHT   = UIScreen.mainScreen().bounds.height
+let SCREEN_WIDTH    = UIScreen.main.bounds.width
+let SCREEN_HEIGHT   = UIScreen.main.bounds.height
 
-func RGBA (r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat) -> UIColor {
+func RGBA (_ r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat) -> UIColor {
     
     return UIColor (red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a)
 }
 
-func PostNotification(name: String, object: AnyObject?, userInfo: [NSObject: AnyObject]?) {
+func PostNotification(_ name: String, object: AnyObject?, userInfo: [AnyHashable: Any]?) {
     
-    NSNotificationCenter.defaultCenter().postNotificationName(name, object: object, userInfo: userInfo)
+    NotificationCenter.default.post(name: Notification.Name(rawValue: name), object: object, userInfo: userInfo)
 }
 
-func AddObserver(observer: AnyObject, selector: Selector, name: String?, object: AnyObject?) {
+func AddObserver(_ observer: AnyObject, selector: Selector, name: String?, object: AnyObject?) {
     
-    NSNotificationCenter.defaultCenter().addObserver(observer, selector: selector, name: name, object: object)
+    NotificationCenter.default.addObserver(observer, selector: selector, name: name.map { NSNotification.Name(rawValue: $0) }, object: object)
 }
 
-func sizeForString(string: String, width: CGFloat, height: CGFloat, font: UIFont) -> CGSize {
+func sizeForString(_ string: String, width: CGFloat, height: CGFloat, font: UIFont) -> CGSize {
     
     let attrStr: NSMutableAttributedString = NSMutableAttributedString(string: string)
     attrStr.addAttribute(NSFontAttributeName, value:font, range: NSMakeRange(0, attrStr.length))
-    let sizeToFit: CGSize = attrStr.boundingRectWithSize(CGSizeMake(width, height), options: .UsesLineFragmentOrigin, context: nil).size
+    let sizeToFit: CGSize = attrStr.boundingRect(with: CGSize(width: width, height: height), options: .usesLineFragmentOrigin, context: nil).size
     return sizeToFit
 }
 
-func imageWithColor(color: UIColor) -> UIImage {
+func imageWithColor(_ color: UIColor) -> UIImage {
     
-    let rect = CGRectMake(0.0, 0.0, 1.0, 1.0)
+    let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
     UIGraphicsBeginImageContext(rect.size)
     let context = UIGraphicsGetCurrentContext()
-    CGContextSetFillColorWithColor(context, color.CGColor)
-    CGContextFillRect(context, rect)
+    context?.setFillColor(color.cgColor)
+    context?.fill(rect)
     let theImage = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
-    return theImage
+    return theImage!
 }
 
 

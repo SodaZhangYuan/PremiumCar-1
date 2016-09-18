@@ -10,12 +10,12 @@ import UIKit
 
 class SubmitVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
-    private var tableView: UITableView!
-    private var phoneTextField: UITextField!
-    private var nameTextField: UITextField!
-    private var dateTextField: UITextField!
-    private var datePicker: UIDatePicker!
-    private var datePickerButton: UIButton!
+    fileprivate var tableView: UITableView!
+    fileprivate var phoneTextField: UITextField!
+    fileprivate var nameTextField: UITextField!
+    fileprivate var dateTextField: UITextField!
+    fileprivate var datePicker: UIDatePicker!
+    fileprivate var datePickerButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -26,19 +26,19 @@ class SubmitVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         self.initUI()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
     
@@ -48,54 +48,54 @@ class SubmitVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     
     func initUI() {
         
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
-        self.tableView = UITableView(frame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 50 - 64), style: .Plain)
-        self.tableView.backgroundColor = UIColor.whiteColor()
+        self.tableView = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 50 - 64), style: .plain)
+        self.tableView.backgroundColor = UIColor.white
         //        self.tableView.separatorStyle = .None
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCellIdentifier")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCellIdentifier")
         self.view.addSubview(self.tableView)
-        self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         nameTextField = self.getTextField()
         nameTextField.placeholder = "请填写您的姓名"
         phoneTextField = self.getTextField()
         phoneTextField.placeholder = "您的联系方式"
-        phoneTextField.keyboardType = .NumberPad
+        phoneTextField.keyboardType = .numberPad
         dateTextField = self.getTextField()
         dateTextField.placeholder = "预约上门时间"
         
-        let btn0 = UIButton(type: .Custom)
+        let btn0 = UIButton(type: .custom)
         btn0.backgroundColor = COLOR_BLACK
-        btn0.setTitle("提交", forState: .Normal)
-        btn0.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        btn0.titleLabel?.font = UIFont.systemFontOfSize(20)
-        btn0.addTarget(self, action: #selector(buttonClicked(_:)), forControlEvents: .TouchUpInside)
+        btn0.setTitle("提交", for: UIControlState())
+        btn0.setTitleColor(UIColor.white, for: UIControlState())
+        btn0.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        btn0.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
         self.view.addSubview(btn0)
         btn0.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 50))
+            make.size.equalTo(CGSize(width: SCREEN_WIDTH, height: 50))
             make.bottom.equalTo(self.view.snp_bottom)
         }
         
         datePicker = UIDatePicker()
-        datePicker.frame = CGRectMake(0, self.view.frame.height + 30, SCREEN_WIDTH, 260)
+        datePicker.frame = CGRect(x: 0, y: self.view.frame.height + 30, width: SCREEN_WIDTH, height: 260)
         datePicker.backgroundColor = RGBA(230, g: 230, b: 230, a: 1)
-        datePicker.setDate(NSDate(), animated: false)
-        datePicker.datePickerMode = UIDatePickerMode.DateAndTime
+        datePicker.setDate(Date(), animated: false)
+        datePicker.datePickerMode = UIDatePickerMode.dateAndTime
         datePicker.minuteInterval = 60 * 60
-        datePicker.minimumDate = NSDate()
-        datePicker.addTarget(self, action:#selector(SubmitVC.datePickerValueChange(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        datePicker.minimumDate = Date()
+        datePicker.addTarget(self, action:#selector(SubmitVC.datePickerValueChange(_:)), for: UIControlEvents.valueChanged)
         self.view.addSubview(datePicker)
         
-        datePickerButton = UIButton(type: .Custom)
-        datePickerButton.frame = CGRectMake(0, self.view.frame.height, SCREEN_WIDTH, 30)
+        datePickerButton = UIButton(type: .custom)
+        datePickerButton.frame = CGRect(x: 0, y: self.view.frame.height, width: SCREEN_WIDTH, height: 30)
         datePickerButton.backgroundColor = RGBA(230, g: 230, b: 230, a: 1)
-        datePickerButton.setTitle("选定预约", forState: .Normal)
-        datePickerButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        datePickerButton.titleLabel?.font = UIFont.systemFontOfSize(16)
-        datePickerButton.addTarget(self, action: #selector(buttonClicked(_:)), forControlEvents: .TouchUpInside)
+        datePickerButton.setTitle("选定预约", for: UIControlState())
+        datePickerButton.setTitleColor(UIColor.black, for: UIControlState())
+        datePickerButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        datePickerButton.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
         self.view.addSubview(datePickerButton)
         
         //default text
@@ -106,64 +106,64 @@ class SubmitVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     
     func getTextField() -> UITextField {
         
-        let textField = UITextField(frame: CGRectMake(10, 10, SCREEN_WIDTH - 20, 40))
-        textField.backgroundColor = UIColor.whiteColor()
+        let textField = UITextField(frame: CGRect(x: 10, y: 10, width: SCREEN_WIDTH - 20, height: 40))
+        textField.backgroundColor = UIColor.white
         textField.delegate = self
-        textField.borderStyle = .None
-        textField.font = UIFont.systemFontOfSize(16)
-        textField.keyboardAppearance = .Light
-        textField.returnKeyType = .Done
+        textField.borderStyle = .none
+        textField.font = UIFont.systemFont(ofSize: 16)
+        textField.keyboardAppearance = .light
+        textField.returnKeyType = .done
         
         return textField
     }
     
     func showDatePicker() {
         
-        UIView.animateWithDuration(0.25) { 
-            self.datePicker.frame = CGRectMake(0, self.view.frame.height - 260, SCREEN_WIDTH, 300)
-            self.datePickerButton.frame = CGRectMake(0, self.view.frame.height - 260 - 30, SCREEN_WIDTH, 30)
-        }
+        UIView.animate(withDuration: 0.25, animations: { 
+            self.datePicker.frame = CGRect(x: 0, y: self.view.frame.height - 260, width: SCREEN_WIDTH, height: 300)
+            self.datePickerButton.frame = CGRect(x: 0, y: self.view.frame.height - 260 - 30, width: SCREEN_WIDTH, height: 30)
+        }) 
     }
     
     func hideDatePicker() {
         
-        UIView.animateWithDuration(0.25) {
-            self.datePicker.frame = CGRectMake(0, self.view.frame.height + 30, SCREEN_WIDTH, 260)
-            self.datePickerButton.frame = CGRectMake(0, self.view.frame.height, SCREEN_WIDTH, 30)
-        }
+        UIView.animate(withDuration: 0.25, animations: {
+            self.datePicker.frame = CGRect(x: 0, y: self.view.frame.height + 30, width: SCREEN_WIDTH, height: 260)
+            self.datePickerButton.frame = CGRect(x: 0, y: self.view.frame.height, width: SCREEN_WIDTH, height: 30)
+        }) 
     }
     
-    func datePickerValueChange(picker: UIDatePicker) {
+    func datePickerValueChange(_ picker: UIDatePicker) {
       
-        let formatter: NSDateFormatter = NSDateFormatter()
+        let formatter: DateFormatter = DateFormatter()
         formatter.dateFormat = "MM月dd日 hh:mm"
 //        formatter.setLocalizedDateFormatFromTemplate("MM月dd日 hh-mm")
-        dateTextField.text = formatter.stringFromDate(picker.date)
+        dateTextField.text = formatter.string(from: picker.date)
     }
     
     //MARK: Handle
-    func buttonClicked(sender: UIButton) {
+    func buttonClicked(_ sender: UIButton) {
         
         if sender == datePickerButton {
             self.hideDatePicker()
         }else {
             let title = String(format: "%@，您的联系方式为%@，预约时间为%@", nameTextField.text!, phoneTextField.text!, dateTextField.text!)
-            let alert: UIAlertController = UIAlertController(title: title, message: "", preferredStyle: .Alert)
-        let action0: UIAlertAction = UIAlertAction(title: "提交", style: .Default) { (alert) in
+            let alert: UIAlertController = UIAlertController(title: title, message: "", preferredStyle: .alert)
+        let action0: UIAlertAction = UIAlertAction(title: "提交", style: .default) { (alert) in
             let promptVC = PromptVC()
             self.navigationController?.pushViewController(promptVC, animated: true)
         }
-        let action1: UIAlertAction = UIAlertAction(title: "取消", style: .Cancel) { (alert) in
+        let action1: UIAlertAction = UIAlertAction(title: "取消", style: .cancel) { (alert) in
         }
         alert.addAction(action0)
         alert.addAction(action1)
-        self.presentViewController(alert, animated: true) {
+        self.present(alert, animated: true) {
         }
         }
     }
     
     //MARK: UITextFieldDelegate
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         if textField == dateTextField {
             self.showDatePicker()
@@ -178,7 +178,7 @@ class SubmitVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         }
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
         return true
@@ -187,37 +187,37 @@ class SubmitVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     //MARK: Request
   
     //MARK: TableViewDelegate
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 3
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return 60
     }
     
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
         return UIView()
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("UITableViewCellIdentifier", forIndexPath: indexPath)
-        cell.selectionStyle = .None
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCellIdentifier", for: indexPath)
+        cell.selectionStyle = .none
         for subview in cell.contentView.subviews {
             subview.removeFromSuperview()
         }
         
-        if indexPath.row == 0 {
+        if (indexPath as NSIndexPath).row == 0 {
             cell.contentView.addSubview(nameTextField)
-        }else if indexPath.row == 1 {
+        }else if (indexPath as NSIndexPath).row == 1 {
             cell.contentView.addSubview(phoneTextField)
         }else {
             cell.contentView.addSubview(dateTextField)
@@ -226,10 +226,10 @@ class SubmitVC: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         return cell
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         nameTextField.resignFirstResponder()
         phoneTextField.resignFirstResponder()

@@ -3,9 +3,9 @@ use_frameworks!
 
 target "PremiumCar" do
 
-pod 'MBProgressHUD', '~> 0.9.1'
-pod 'SnapKit', '~> 0.22.0'
-pod 'EGOTableViewPullRefresh', '~> 0.1.0'
+pod 'MBProgressHUD'
+pod 'SnapKit'
+pod 'EGOTableViewPullRefresh'
 pod 'JDStatusBarNotification'
 
 end
