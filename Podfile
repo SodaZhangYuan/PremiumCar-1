@@ -4,7 +4,7 @@ use_frameworks!
 target "PremiumCar" do
 
 pod 'MBProgressHUD'
-pod 'SnapKit'
+pod 'SnapKit', '~> 3.0.0’
 pod 'EGOTableViewPullRefresh'
 pod 'JDStatusBarNotification'
 

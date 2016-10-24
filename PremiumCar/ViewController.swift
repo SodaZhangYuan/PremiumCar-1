@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupUI()
     }
     
@@ -107,15 +108,15 @@ class ViewController: UIViewController {
             let carListVC = CarListVC()
             carListVC.title = title
             navigationController?.pushViewController(carListVC, animated: true)
+        }else if button.tag == 4 {
+            
+            let callButlerVC = CallButlerVC()
+            navigationController?.pushViewController(callButlerVC, animated: true)
+        }else if button.tag == 5{
+            
+            let myCarVC = MyCarVC()
+            navigationController?.pushViewController(myCarVC, animated: true)
         }
     }
 
 }
-
-
-
-
-
-
-
-

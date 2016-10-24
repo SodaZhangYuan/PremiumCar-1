@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        menuVC = ViewController()
+        menuVC = LoginViewController()
         let nav = UINavigationController(rootViewController: menuVC!)
         window?.rootViewController = nav
         window?.makeKeyAndVisible()

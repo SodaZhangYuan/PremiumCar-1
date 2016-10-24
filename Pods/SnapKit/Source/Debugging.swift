@@ -29,7 +29,7 @@
 
 public extension LayoutConstraint {
     
-    override public var description: String {
+    override open var description: String {
         var description = "<"
         
         description += descriptionForObject(self)
@@ -144,7 +144,7 @@ private func descriptionForObject(_ object: AnyObject) -> String {
     desc += type(of: object).description()
     
     if let object = object as? ConstraintView {
-        desc += ":\(object.snp.label ?? pointerDescription)"
+        desc += ":\(object.snp.label() ?? pointerDescription)"
     } else if let object = object as? LayoutConstraint {
         desc += ":\(object.label ?? pointerDescription)"
     } else {

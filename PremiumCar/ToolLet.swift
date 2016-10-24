@@ -47,9 +47,3 @@ func imageWithColor(_ color: UIColor) -> UIImage {
 }
 
 
-
-
-
-
-
-

@@ -28,9 +28,9 @@
 #endif
 
 
-public class LayoutConstraint: NSLayoutConstraint {
+open class LayoutConstraint: NSLayoutConstraint {
     
-    public var label: String? {
+    open var label: String? {
         get {
             return self.identifier
         }
@@ -39,7 +39,7 @@ public class LayoutConstraint: NSLayoutConstraint {
         }
     }
     
-    internal var constraint: Constraint! = nil
+    internal weak var constraint: Constraint? = nil
     
 }
 

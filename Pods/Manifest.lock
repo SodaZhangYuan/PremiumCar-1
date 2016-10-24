@@ -2,20 +2,18 @@ PODS:
   - EGOTableViewPullRefresh (0.1.0)
   - JDStatusBarNotification (1.5.4)
   - MBProgressHUD (1.0.0)
-  - SnapKit (3.0.0)
+  - SnapKit (3.0.2)
 
 DEPENDENCIES:
   - EGOTableViewPullRefresh
   - JDStatusBarNotification
   - MBProgressHUD
-  - SnapKit
+  - SnapKit (~> 3.0.0)
 
 SPEC CHECKSUMS:
   EGOTableViewPullRefresh: d4c15be51914f4168d6fd7529b6ad3a4ab01e5f4
   JDStatusBarNotification: d47dded0594a50a39c84a2cc5aa356fcf6750d0e
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  SnapKit: 98af0a4e9369d3c58f758967518081dbdc7eb1d9
+  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
 
-PODFILE CHECKSUM: 777b4f115637b80c6572d3dc37fb2154cecdecfb
-
-COCOAPODS: 1.0.1
+COCOAPODS: 0.39.0
