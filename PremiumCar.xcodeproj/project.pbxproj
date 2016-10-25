@@ -12,6 +12,8 @@
 		25813E0E1D94D5BB00291D5B /* MyCarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25813E0B1D94D5BB00291D5B /* MyCarCell.swift */; };
 		25813E0F1D94D5BB00291D5B /* MyCarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25813E0C1D94D5BB00291D5B /* MyCarVC.swift */; };
 		2590CF491DBE14320039D62A /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590CF481DBE14320039D62A /* RegisterVC.swift */; };
+		2590CF511DBF0C390039D62A /* TimeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2590CF501DBF0C390039D62A /* TimeButton.m */; };
+		2590CF561DBF59590039D62A /* PersonalInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590CF551DBF59590039D62A /* PersonalInfoVC.swift */; };
 		A85B6CCD1D7D7DB100E43F59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85B6CCC1D7D7DB100E43F59 /* AppDelegate.swift */; };
 		A85B6CCF1D7D7DB100E43F59 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85B6CCE1D7D7DB100E43F59 /* ViewController.swift */; };
 		A85B6CD41D7D7DB100E43F59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A85B6CD31D7D7DB100E43F59 /* Assets.xcassets */; };
@@ -34,6 +36,11 @@
 		25813E0B1D94D5BB00291D5B /* MyCarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCarCell.swift; sourceTree = "<group>"; };
 		25813E0C1D94D5BB00291D5B /* MyCarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCarVC.swift; sourceTree = "<group>"; };
 		2590CF481DBE14320039D62A /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		2590CF4B1DBF0BD80039D62A /* PremiumCar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PremiumCar-Bridging-Header.h"; sourceTree = "<group>"; };
+		2590CF4F1DBF0C390039D62A /* TimeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeButton.h; sourceTree = "<group>"; };
+		2590CF501DBF0C390039D62A /* TimeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeButton.m; sourceTree = "<group>"; };
+		2590CF521DBF0EE30039D62A /* NSString+dataFormat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+dataFormat.h"; sourceTree = "<group>"; };
+		2590CF551DBF59590039D62A /* PersonalInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalInfoVC.swift; sourceTree = "<group>"; };
 		91E8A6288D2F82C45F2CFABD /* Pods_PremiumCar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PremiumCar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A47E5A7B3061FA25282F601C /* Pods-PremiumCar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PremiumCar.release.xcconfig"; path = "Pods/Target Support Files/Pods-PremiumCar/Pods-PremiumCar.release.xcconfig"; sourceTree = "<group>"; };
 		A85B6CC91D7D7DB100E43F59 /* PremiumCar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PremiumCar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +103,7 @@
 				A85B6CCC1D7D7DB100E43F59 /* AppDelegate.swift */,
 				254C6A661DBDDD5C00C0B80F /* LoginViewController.swift */,
 				2590CF481DBE14320039D62A /* RegisterVC.swift */,
+				2590CF551DBF59590039D62A /* PersonalInfoVC.swift */,
 				A85B6CCE1D7D7DB100E43F59 /* ViewController.swift */,
 				A85B6CE91D7E6D2900E43F59 /* CarListVC.swift */,
 				A85B6CED1D7E727400E43F59 /* CarListCell.swift */,
@@ -109,6 +117,10 @@
 				A85B6CE71D7E604B00E43F59 /* SetupViewLET.swift */,
 				A85B6CDE1D7D875D00E43F59 /* ColorLET.swift */,
 				A85B6CDF1D7D875D00E43F59 /* ToolLet.swift */,
+				2590CF4F1DBF0C390039D62A /* TimeButton.h */,
+				2590CF501DBF0C390039D62A /* TimeButton.m */,
+				2590CF521DBF0EE30039D62A /* NSString+dataFormat.h */,
+				2590CF4B1DBF0BD80039D62A /* PremiumCar-Bridging-Header.h */,
 				A85B6CD31D7D7DB100E43F59 /* Assets.xcassets */,
 				A85B6CD81D7D7DB100E43F59 /* Info.plist */,
 			);
@@ -160,8 +172,8 @@
 				TargetAttributes = {
 					A85B6CC81D7D7DB100E43F59 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = CNANW5EQB5;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -268,11 +280,13 @@
 				254C6A671DBDDD5C00C0B80F /* LoginViewController.swift in Sources */,
 				A8A2406C1D8284CA00964F74 /* CarDetailVC.swift in Sources */,
 				25813E0D1D94D5BB00291D5B /* CallButlerVC.swift in Sources */,
+				2590CF561DBF59590039D62A /* PersonalInfoVC.swift in Sources */,
 				A85B6CE01D7D875D00E43F59 /* ColorLET.swift in Sources */,
 				A85B6CE81D7E604B00E43F59 /* SetupViewLET.swift in Sources */,
 				A8B7AA1B1D8694CD00C02B95 /* PromptVC.swift in Sources */,
 				2590CF491DBE14320039D62A /* RegisterVC.swift in Sources */,
 				A85B6CEA1D7E6D2A00E43F59 /* CarListVC.swift in Sources */,
+				2590CF511DBF0C390039D62A /* TimeButton.m in Sources */,
 				25813E0E1D94D5BB00291D5B /* MyCarCell.swift in Sources */,
 				A85B6CCD1D7D7DB100E43F59 /* AppDelegate.swift in Sources */,
 				25813E0F1D94D5BB00291D5B /* MyCarVC.swift in Sources */,
@@ -379,12 +393,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = CNANW5EQB5;
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuan Zhang (VV2N6DP929)";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PremiumCar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = soda.PremiumCar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0604341c-0930-44ff-a828-732a9a2e53c0";
+				PROVISIONING_PROFILE_SPECIFIER = DevelopmentPremiumCar;
+				SWIFT_OBJC_BRIDGING_HEADER = "PremiumCar/PremiumCar-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -395,12 +415,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = CNANW5EQB5;
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuan Zhang (VV2N6DP929)";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PremiumCar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = soda.PremiumCar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0604341c-0930-44ff-a828-732a9a2e53c0";
+				PROVISIONING_PROFILE_SPECIFIER = DevelopmentPremiumCar;
+				SWIFT_OBJC_BRIDGING_HEADER = "PremiumCar/PremiumCar-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

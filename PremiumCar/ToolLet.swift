@@ -15,6 +15,19 @@ func RGBA (_ r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat) -> UIColor {
     
     return UIColor (red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a)
 }
+// button样式
+func setButton(button: UIButton, with type: Int){
+    
+    if type == 0 {
+        
+        button.setTitleColor(RGBA(255, g: 255, b: 255, a: 0.4), for: UIControlState.normal)
+        button.isEnabled = false
+    }else{
+        
+        button.setTitleColor(UIColor.white, for: UIControlState.normal)
+        button.isEnabled = true
+    }
+}
 
 func PostNotification(_ name: String, object: AnyObject?, userInfo: [AnyHashable: Any]?) {
     

@@ -45,6 +45,7 @@ class LoginViewController: UIViewController {
         password = UITextField(frame: CGRect(x: 30, y: (mobileNo?.frame.maxY)! + 12, width: SCREEN_WIDTH - 60, height: 40))
         password?.attributedPlaceholder = NSAttributedString(string:"密码", attributes: [NSForegroundColorAttributeName: UIColor.white])
         password?.backgroundColor = LOGIN_BACK
+        password?.isSecureTextEntry = true
         password?.textColor = UIColor.white
         password?.borderStyle = UITextBorderStyle.roundedRect
         password?.keyboardType = UIKeyboardType.default
@@ -61,6 +62,7 @@ class LoginViewController: UIViewController {
         loginBtn?.layer.masksToBounds = true
         loginBtn?.backgroundColor = UIColor.clear
         loginBtn?.setTitle("登录", for: UIControlState.normal)
+        setButton(button: loginBtn!, with: 0)
         loginBtn?.setTitleColor(RGBA(255, g: 255, b: 255, a: 0.4), for: UIControlState.normal)
         loginBtn?.addTarget(self, action: #selector(login), for: UIControlEvents.touchUpInside)
         view.addSubview(loginBtn!)
@@ -79,6 +81,12 @@ class LoginViewController: UIViewController {
     
     func textFieldDidChange() {
         
+        if mobileNo?.text?.characters.count == 11 && password?.text?.characters.count != 0 {
+            
+            setButton(button: loginBtn!, with: 1)
+        }else{
+            setButton(button: loginBtn!, with: 0)
+        }
     }
     
     func login() {
@@ -88,7 +96,8 @@ class LoginViewController: UIViewController {
     
     func register() {
         
-        print("注册")
+        let registerVC = RegisterVC()
+        navigationController?.pushViewController(registerVC, animated: true)
     }
     
 }
@@ -101,5 +110,13 @@ extension LoginViewController: UITextFieldDelegate {
         password?.resignFirstResponder()
     }
     
-    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == mobileNo {
+            if range.location == 11 {
+                return false
+            }
+        }
+        return true
+    }
 }
