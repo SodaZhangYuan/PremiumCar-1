@@ -45,7 +45,7 @@ class CarListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     fileprivate func setupUI() {
         
         self.view.backgroundColor = RGBA(0, g: 0, b: 0, a: 1)
-        
+        self.navigationController?.isNavigationBarHidden = false
         self.tableView = UITableView(frame: self.view.bounds, style: .plain)
         self.tableView.backgroundColor = UIColor.white
         self.tableView.delegate = self

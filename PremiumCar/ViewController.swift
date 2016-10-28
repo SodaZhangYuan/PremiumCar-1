@@ -8,115 +8,133 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var carListTableView: UITableView!
+    fileprivate var dataSource: [CarModel] = []  {
+        didSet {
+            carListTableView?.reloadData()
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        mock()
         setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
         
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarPosition.any, barMetrics: UIBarMetrics.default)
+        self.navigationController?.isNavigationBarHidden = true
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    //MARK: Data
+    fileprivate func mock() {
         
-        super.viewWillDisappear(animated)
+        let dic0 = ["name" : "保时捷 911", "url" : "Porsche-911", "numbel" : "京A 32N28"]
+        let model0 = CarModel(dic: dic0 as [String : AnyObject])
+        let dic1 = ["name" : "宾利 添越", "url" : "Bingley-bentayga", "numbel" : "京N 2O4P2"]
+        let model1 = CarModel(dic: dic1 as [String : AnyObject])
+        let dic2 = ["name" : "捷豹 F-Pace", "url" : "Jaguar-fPace", "numbel" : "京Q 12JL1"]
+        let model2 = CarModel(dic: dic2 as [String : AnyObject])
+        let dic3 = ["name" : "奔驰 SL", "url" : "Benz-SL", "numbel" : "京A 93DL8"]
+        let model3 = CarModel(dic: dic3 as [String : AnyObject])
+        let dic4 = ["name" : "劳斯莱斯 魅影", "url" : "RollsRoyce-wraith", "numbel" : "京Q J4Y89"]
+        let model4 = CarModel(dic: dic4 as [String : AnyObject])
+        let dic5 = ["name" : "特斯拉 ModelS", "url" : "Tesla-modelS", "numbel" : "京N 6NN18"]
+        let model5 = CarModel(dic: dic5 as [String : AnyObject])
         
-        navigationController?.navigationBar.setBackgroundImage(imageWithColor(COLOR_BLACK), for: UIBarPosition.any, barMetrics: UIBarMetrics.default)
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        dataSource = [model0, model1, model2, model3, model4, model5]
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
     //MARK: UI
     fileprivate func setupUI() {
         
-        self.view.backgroundColor = RGBA(0, g: 0, b: 0, a: 1)
+        self.view.backgroundColor = COLOR_BLACK
         
         let img = UIImage(named: "VCBackground")
         let imgView = UIImageView(frame: self.view.bounds)
         imgView.contentMode = .scaleAspectFill
         imgView.image = img
-        self.view.addSubview(imgView)
         
-        let btn0 = getButtons(CGRect(x: 10, y: 200, width: SCREEN_WIDTH - 20, height: 40), tag: 1)
-        self.view.addSubview(btn0)
-        let lab0 = getLabel(btn0.frame, title: "保养")
-        self.view.addSubview(lab0)
+        let personalInfo = UIButton(frame: CGRect(x: (SCREEN_WIDTH - 70) / 2, y: 64, width: 70, height: 70))
+        personalInfo.setImage(UIImage(named: "person"), for: UIControlState.normal)
+        personalInfo.backgroundColor = UIColor.clear
+        personalInfo.addTarget(self, action: #selector(buttonClick), for: UIControlEvents.touchUpInside)
         
-        let btn1 = getButtons(CGRect(x: 10, y: 250, width: SCREEN_WIDTH - 20, height: 40), tag: 2)
-        self.view.addSubview(btn1)
-        let lab1 = getLabel(btn1.frame, title: "续保")
-        self.view.addSubview(lab1)
+        carListTableView = UITableView(frame: self.view.bounds, style: .plain)
+        carListTableView.backgroundColor = COLOR_BLACK
+        carListTableView.delegate = self
+        carListTableView.dataSource = self
+        carListTableView.register(CarListCell.self, forCellReuseIdentifier: "CarListCellIdentifier")
+        self.view.addSubview(carListTableView)
+        carListTableView.tableFooterView = UIView(frame: CGRect.zero)
         
-        let btn2 = getButtons(CGRect(x: 10, y: 300, width: SCREEN_WIDTH - 20, height: 40), tag: 3)
-        self.view.addSubview(btn2)
-        btn2.isEnabled = false
-        btn2.alpha = 0.2
-        let lab2 = getLabel(btn2.frame, title: "车友圈")
-        self.view.addSubview(lab2)
-        lab2.alpha = 0.4
-    
-        let btn3 = getButtons(CGRect(x: 10, y: 350, width: SCREEN_WIDTH - 20, height: 40), tag: 4)
-        self.view.addSubview(btn3)
-        let lab3 = getLabel(btn3.frame, title: "呼叫管家")
-        self.view.addSubview(lab3)
+        let header = UIView()
+        header.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 150)
+        header.addSubview(personalInfo)
+        carListTableView.tableHeaderView = header
         
-        let btn4 = getButtons(CGRect(x: 10, y: 400, width: SCREEN_WIDTH - 20, height: 40), tag: 5)
-        self.view.addSubview(btn4)
-        let lab4 = getLabel(btn4.frame, title: "我的车")
-        self.view.addSubview(lab4)
+        let addBtn = UIButton(type: UIButtonType.custom)
+        addBtn.frame = CGRect(x: 0, y: SCREEN_HEIGHT - 44, width: SCREEN_WIDTH, height: 44)
+        addBtn.backgroundColor = FUZZY_BACK
+        addBtn.setImage(UIImage(named: "addOther"), for: UIControlState.normal)
+        addBtn.setTitle("增加车辆。", for: UIControlState.normal)
+        addBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        addBtn.addTarget(self, action: #selector(addMoreCar), for: UIControlEvents.touchUpInside)
+        let line = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 0.5))
+        line.backgroundColor = FUZZY_BACK
+        addBtn.addSubview(line)
+        carListTableView.tableFooterView = addBtn
+//        view.addSubview(addBtn)
     }
     
-    func getButtons(_ rect: CGRect, tag: NSInteger) -> UIButton {
+    func addMoreCar() {
         
-        let btn = UIButton(type: .custom)
-        btn.frame = rect
-        btn.backgroundColor = UIColor.black
-        btn.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
-        btn.alpha = 0.4
-        btn.tag = tag
-        
-        return btn
     }
     
-    func getLabel(_ rect: CGRect, title: String) -> UILabel {
+    func buttonClick() {
         
-        let label = UILabel()
-        label.frame = rect
-        label.text = title
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.textColor = UIColor.white
-        
-        return label
+        let personalVC = PersonalInfoVC()
+        self.navigationController?.pushViewController(personalVC, animated: true)
     }
     
-    func buttonClicked(_ button: UIButton) {
+    //MARK: TableViewDelegate
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if button.tag == 1 || button.tag == 2 {
-//            let title = button.tag == 1 ? "选择要保养的车" : "选择要续保的车"
-            let carListVC = CarListVC()
-            carListVC.title = title
-            navigationController?.pushViewController(carListVC, animated: true)
-        }else if button.tag == 4 {
-            
-            let callButlerVC = CallButlerVC()
-            navigationController?.pushViewController(callButlerVC, animated: true)
-        }else if button.tag == 5{
-            
-            let myCarVC = MyCarVC()
-            navigationController?.pushViewController(myCarVC, animated: true)
+        if dataSource.count > 0 {
+            return dataSource.count
+        }else {
+            return 0
         }
     }
-
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return CarListCell.height()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CarListCellIdentifier", for: indexPath) as! CarListCell
+        cell.selectionStyle = .gray
+        cell.accessoryType = .disclosureIndicator
+        
+        let model: CarModel = dataSource[(indexPath as NSIndexPath).row]
+        cell.update(model)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let model: CarModel = dataSource[(indexPath as NSIndexPath).row]
+        let detailVC = CarDetailVC()
+        detailVC.carModel = model
+        detailVC.title = model.name
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
 }

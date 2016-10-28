@@ -21,20 +21,24 @@ class PersonalInfoVC: UIViewController {
         
         setupUI()
     }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        
+//        self.navigationController?.isNavigationBarHidden = true
+//    }
     
     fileprivate func setupUI() {
-        
-//        self.navigationController?.isNavigationBarHidden = true
+    
         self.view.backgroundColor = COLOR_BLACK
         
-        let infoImg = UIImageView(frame: CGRect(x: (SCREEN_WIDTH - 100) * 0.5, y: 100, width: 100, height: 100))
+        let infoImg = UIImageView(frame: CGRect(x: (SCREEN_WIDTH - 100) * 0.5, y: 150, width: 100, height: 100))
         infoImg.image = UIImage(named:"personalInfo")
         view.addSubview(infoImg)
         
         nameTxt = UITextField(frame: CGRect(x: 30, y:(infoImg.frame.maxY) + 15, width: SCREEN_WIDTH - 60, height: 40))
         nameTxt?.attributedPlaceholder = NSAttributedString(string:"真实姓名", attributes: [NSForegroundColorAttributeName: UIColor.white])
         nameTxt?.borderStyle = UITextBorderStyle.roundedRect
-        nameTxt?.backgroundColor = LOGIN_BACK
+        nameTxt?.backgroundColor = FUZZY_BACK
         nameTxt?.textColor = UIColor.white
         nameTxt?.keyboardType = UIKeyboardType.default
         nameTxt?.returnKeyType = UIReturnKeyType.done
@@ -45,7 +49,7 @@ class PersonalInfoVC: UIViewController {
         phoneText = UITextField(frame: CGRect(x: 30, y:(nameTxt?.frame.maxY)! + 12, width: SCREEN_WIDTH - 60, height: 40))
         phoneText?.attributedPlaceholder = NSAttributedString(string:"联系电话", attributes: [NSForegroundColorAttributeName: UIColor.white])
         phoneText?.borderStyle = UITextBorderStyle.roundedRect
-        phoneText?.backgroundColor = LOGIN_BACK
+        phoneText?.backgroundColor = FUZZY_BACK
         phoneText?.textColor = UIColor.white
         phoneText?.keyboardType = UIKeyboardType.numberPad
         phoneText?.returnKeyType = UIReturnKeyType.done
@@ -56,7 +60,7 @@ class PersonalInfoVC: UIViewController {
         addressText = UITextField(frame: CGRect(x: 30, y:(phoneText?.frame.maxY)! + 12, width: SCREEN_WIDTH - 60, height: 40))
         addressText?.attributedPlaceholder = NSAttributedString(string:"地址", attributes: [NSForegroundColorAttributeName: UIColor.white])
         addressText?.borderStyle = UITextBorderStyle.roundedRect
-        addressText?.backgroundColor = LOGIN_BACK
+        addressText?.backgroundColor = FUZZY_BACK
         addressText?.clearButtonMode = UITextFieldViewMode.whileEditing
         addressText?.textColor = UIColor.white
         addressText?.keyboardType = UIKeyboardType.default
@@ -69,7 +73,7 @@ class PersonalInfoVC: UIViewController {
         submitBtn?.frame = CGRect(x: 30, y: (addressText?.frame.maxY)! + 12, width: SCREEN_WIDTH - 60, height: 40)
         submitBtn?.layer.cornerRadius = 4
         submitBtn?.layer.borderWidth = 0.7
-        submitBtn?.layer.borderColor = LOGIN_BACK.cgColor
+        submitBtn?.layer.borderColor = FUZZY_BACK.cgColor
         submitBtn?.layer.masksToBounds = true
         submitBtn?.backgroundColor = UIColor.clear
         submitBtn?.setTitle("提交", for: UIControlState.normal)
@@ -81,15 +85,12 @@ class PersonalInfoVC: UIViewController {
     
     func submitInfo() {
         
-        print("提交")
-    }
-    
-    func backToLogin() {
-        
-        print("退回登录页")
-        let loginVC = LoginViewController()
-        self.navigationController?.pushViewController(loginVC, animated: true)
-        //        self.dismiss(animated: true, completion: nil)
+        TZNetworkTool.shareNetworkTool.personalInfo(telephone: (phoneText?.text)!, name: (nameTxt?.text)!, addr: (addressText?.text)!) { (isSuccess) in
+            if isSuccess {
+                let carBrandsVC = CarBrandsVC()
+                self.navigationController?.pushViewController(carBrandsVC, animated: true)
+            }
+        }
     }
     
     func textFieldDidChange() {
@@ -100,7 +101,6 @@ class PersonalInfoVC: UIViewController {
         }else{
             setButton(button: submitBtn!, with: 0)
         }
-        
     }
 }
 

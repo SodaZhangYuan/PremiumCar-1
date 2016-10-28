@@ -84,14 +84,20 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-PremiumCar/Alamofire.framework"
   install_framework "Pods-PremiumCar/EGOTableViewPullRefresh.framework"
   install_framework "Pods-PremiumCar/JDStatusBarNotification.framework"
-  install_framework "Pods-PremiumCar/MBProgressHUD.framework"
+  install_framework "Pods-PremiumCar/Kingfisher.framework"
+  install_framework "Pods-PremiumCar/SVProgressHUD.framework"
   install_framework "Pods-PremiumCar/SnapKit.framework"
+  install_framework "Pods-PremiumCar/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-PremiumCar/Alamofire.framework"
   install_framework "Pods-PremiumCar/EGOTableViewPullRefresh.framework"
   install_framework "Pods-PremiumCar/JDStatusBarNotification.framework"
-  install_framework "Pods-PremiumCar/MBProgressHUD.framework"
+  install_framework "Pods-PremiumCar/Kingfisher.framework"
+  install_framework "Pods-PremiumCar/SVProgressHUD.framework"
   install_framework "Pods-PremiumCar/SnapKit.framework"
+  install_framework "Pods-PremiumCar/SwiftyJSON.framework"
 fi

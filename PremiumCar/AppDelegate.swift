@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var menuVC: LoginViewController?
+    var menuVC: CarBrandsVC?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        menuVC = LoginViewController()
+        menuVC = CarBrandsVC()
         let nav = UINavigationController(rootViewController: menuVC!)
         window?.rootViewController = nav
         window?.makeKeyAndVisible()

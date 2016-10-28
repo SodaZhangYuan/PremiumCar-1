@@ -27,14 +27,14 @@ class LoginViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = COLOR_BLACK
         
-        let carImage = UIImageView(frame: CGRect(x: (SCREEN_WIDTH - 150) * 0.5, y: 170, width: 150, height: 60))
+        let carImage = UIImageView(frame: CGRect(x: (SCREEN_WIDTH - 100) * 0.5, y: 150, width: 100, height: 100))
         carImage.image = UIImage(named: "carIcon")
         view.addSubview(carImage)
         
         mobileNo = UITextField(frame: CGRect(x: 30, y:(carImage.frame.maxY) + 15, width: SCREEN_WIDTH - 60, height: 40))
         mobileNo?.attributedPlaceholder = NSAttributedString(string:"帐号", attributes: [NSForegroundColorAttributeName: UIColor.white])
         mobileNo?.borderStyle = UITextBorderStyle.roundedRect
-        mobileNo?.backgroundColor = LOGIN_BACK
+        mobileNo?.backgroundColor = FUZZY_BACK
         mobileNo?.textColor = UIColor.white
         mobileNo?.keyboardType = UIKeyboardType.numberPad
         mobileNo?.returnKeyType = UIReturnKeyType.done
@@ -44,7 +44,7 @@ class LoginViewController: UIViewController {
         
         password = UITextField(frame: CGRect(x: 30, y: (mobileNo?.frame.maxY)! + 12, width: SCREEN_WIDTH - 60, height: 40))
         password?.attributedPlaceholder = NSAttributedString(string:"密码", attributes: [NSForegroundColorAttributeName: UIColor.white])
-        password?.backgroundColor = LOGIN_BACK
+        password?.backgroundColor = FUZZY_BACK
         password?.isSecureTextEntry = true
         password?.textColor = UIColor.white
         password?.borderStyle = UITextBorderStyle.roundedRect
@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
         loginBtn?.frame = CGRect(x: 30, y: (password?.frame.maxY)! + 12, width: SCREEN_WIDTH - 60, height: 40)
         loginBtn?.layer.cornerRadius = 4
         loginBtn?.layer.borderWidth = 0.7
-        loginBtn?.layer.borderColor = LOGIN_BACK.cgColor
+        loginBtn?.layer.borderColor = FUZZY_BACK.cgColor
         loginBtn?.layer.masksToBounds = true
         loginBtn?.backgroundColor = UIColor.clear
         loginBtn?.setTitle("登录", for: UIControlState.normal)
@@ -69,12 +69,12 @@ class LoginViewController: UIViewController {
         
         registerBtn = UIButton(type: UIButtonType.custom)
         registerBtn?.frame = CGRect(x: 0, y: SCREEN_HEIGHT - 44, width: SCREEN_WIDTH, height: 44)
-        registerBtn?.backgroundColor = LOGIN_BACK
+        registerBtn?.backgroundColor = FUZZY_BACK
         registerBtn?.setTitle("还没有账户？注册。", for: UIControlState.normal)
         registerBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         registerBtn?.addTarget(self, action: #selector(register), for: UIControlEvents.touchUpInside)
         let line = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 0.5))
-        line.backgroundColor = LOGIN_BACK
+        line.backgroundColor = FUZZY_BACK
         registerBtn?.addSubview(line)
         view.addSubview(registerBtn!)
     }
@@ -91,7 +91,12 @@ class LoginViewController: UIViewController {
     
     func login() {
         
-        print("登录")
+        TZNetworkTool.shareNetworkTool.login(mobileNo: (mobileNo?.text)!, pwd: (password?.text)!) { (isSuccess) in
+            if isSuccess {
+                let viewController = ViewController()
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+        }
     }
     
     func register() {
